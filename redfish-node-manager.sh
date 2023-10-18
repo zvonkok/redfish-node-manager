@@ -82,9 +82,11 @@ if [ "$redfish_vendor" == "Lenovo" ]; then
         # rather then Bios which is prohibited
         curl -X PATCH https://"${redfish_ipv4_ip}"/redfish/v1/Systems/1/Bios/Pending -u  "${REDFISH_USER}:${REDFISH_PASSWD}" -H "Content-Type: application/json" -d "${bios_snp_settings[${redfish_vendor}]}" -ks  | jq .
         curl -ks https://"${redfish_ipv4_ip}"/redfish/v1/Systems/1/Bios/Pending  -u  "${REDFISH_USER}:${REDFISH_PASSWD}" | jq .
+
+        #curl -X POST https://"${redfish_ipv4_ip}"/redfish/v1/Systems/1/Actions/ComputerSystem.Reset -H "Content-Type: application/json" -d '{"ResetType": "GracefulRestart"}' -u  "${REDFISH_USER}:${REDFISH_PASSWD}" -ks | jq .
 fi
 
 
 
-curl -X POST https://"${redfish_ipv4_ip}"/redfish/v1/Systems/1/Actions/ComputerSystem.Reset -H "Content-Type: application/json" -d '{"ResetType": "GracefulRestart"}' -u  "${REDFISH_USER}:${REDFISH_PASSWD}" -ks | jq .
+
 
