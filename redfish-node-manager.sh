@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-set -e 
+#set -e 
 #set -x
 
 
@@ -25,7 +25,7 @@ get_redfish_ip () {
         for i in redfish_host_interface_*; do
                 redfish_host_interface=$(cat "$i")
                 redfish_protocol=$(echo "$redfish_host_interface" | grep -o "Redfish over IP")
-                if [ "$redfish_protocol" != "Redfish over IP" ]; then
+                if [ -z "$redfish_protocol" ]; then
                         rm -f "$i"
                         continue
                 fi
